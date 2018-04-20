@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://js-grid.com/js/jsgrid.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="http://js-grid.com/css/jsgrid.min.css"/>
+    <link rel="stylesheet" type="text/css" href="http://js-grid.com/css/jsgrid-theme.min.css"/>
+</head>
+<body>
+<h1>Welcome</h1>
+<h2 th:utext="${message}">.</h2>
+<br/>
+<input type="text" id="query">
+<input type="button" value="Search" onclick="sendQuery();">
+<div id="grid"></div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+        var $offers = [[${offers}]]
+
+        $("#grid").jsGrid({
+            width: "100%",
+            height: "400px",
+
+            inserting: false,
+            editing: false,
+            sorting: true,
+            pagind: true,
+
+            data: $offers,
+
+            fields: [
+                { name: "vendorCode", title: "Vendor code", type: "text", width: 30, validate: "required" },
+                { name: "name", title: "Name", type: "text", width: 70},
+                { name: "price", title: "Price", type: "number", width: 30, align: "right"}
+            ]
+        })
+    /*]]>*/
+</script>
+<br/>
+<div id="output">
+    <textarea id="textarea" rows="16" cols="80" readonly="readonly"></textarea>
+</div>
+
+<script type="text/javascript" src="js/ws.js"></script>
+
+</body>
+</html>
